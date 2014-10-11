@@ -1,0 +1,70 @@
+<%= form_for @customer, :html => { :class => "form-horizontal customer" } do |f| %>
+
+    <% if @customer.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@customer.errors.count, "error") %> prohibited this customer from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @customer.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    
+      <%= f.text_field :name , :class => 'form-control'%>
+ 
+    <%= error_span(@customer[:name]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :mobile, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.telephone_field :mobile%>
+    </div>
+    <%= error_span(@customer[:mobile]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :address, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :address%>
+    </div>
+    <%= error_span(@customer[:address]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :check_in_date, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.date_field :check_in_date%>
+    </div>
+    <%= error_span(@customer[:check_in_date]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :no_of_days, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :no_of_days%>
+    </div>
+    <%= error_span(@customer[:no_of_days]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :room_type, :class => 'control-label' %>
+    <div class="controls">
+      <% options = options_for_select([['AC','AC'],['NON AC','NON AC']]) %>
+      <%= f.select :room_type, options%>
+    </div>
+    <%= error_span(@customer[:room_type]) %>
+  </div>
+  <div>
+   <hr>
+  </div>
+  <div class="control-group">
+  <%= f.submit "confirm", :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            customers_path, :class => 'btn btn-default' %>
+  </div>
+
+<% end %>

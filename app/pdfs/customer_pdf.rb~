@@ -1,0 +1,6 @@
+class CustomerPdf < Prawn::Document
+	def initialize
+	super
+	text "super"
+	end
+end
